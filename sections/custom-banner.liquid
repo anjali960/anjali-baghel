@@ -1,0 +1,51 @@
+{% schema %}
+{
+  "name": "Custom Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "top_text",
+      "label": "Top text",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Banner"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="custom-banner">
+  <img src="{{ section.settings.banner_image | image_url: width: 2000 }}">
+  
+  <div class="banner-content">
+    <p>{{ section.settings.top_text }}</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.description }}</p>
+    <button>{{ section.settings.button_text }}</button>
+  </div>
+</div>
