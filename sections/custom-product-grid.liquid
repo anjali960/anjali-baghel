@@ -1,0 +1,35 @@
+{% schema %}
+{
+  "name": "Custom Product Grid",
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select product"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Custom Product Grid"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="product-grid">
+  {% for block in section.blocks %}
+    {% assign product = block.settings.product %}
+    
+    <div>
+      <img src="{{ product.featured_image | image_url: width: 500 }}">
+    </div>
+
+  {% endfor %}
+</div>
