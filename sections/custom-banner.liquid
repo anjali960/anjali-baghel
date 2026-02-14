@@ -17,7 +17,8 @@
     {
       "type": "textarea",
       "id": "description",
-      "label": "Description"
+      "label": "Description",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
     },
     {
       "type": "text",
@@ -40,12 +41,77 @@
 {% endschema %}
 
 <div class="custom-banner">
-  <img src="{{ section.settings.banner_image | image_url: width: 2000 }}">
-  
+
+  {% if section.settings.banner_image != blank %}
+    {{
+      section.settings.banner_image
+      | image_url: width: 2000
+      | image_tag:
+        loading: 'lazy',
+        alt: section.settings.heading,
+        class: 'banner-image'
+    }}
+  {% endif %}
+
   <div class="banner-content">
-    <p>{{ section.settings.top_text }}</p>
-    <h1>{{ section.settings.heading }}</h1>
-    <p>{{ section.settings.description }}</p>
-    <button>{{ section.settings.button_text }}</button>
+    
+    {% if section.settings.top_text != blank %}
+      <p class="banner-top-text">
+        {{ section.settings.top_text }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h1 class="banner-heading">
+        {{ section.settings.heading }}
+      </h1>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <p class="banner-description">
+        {{ section.settings.description }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.button_text != blank %}
+      <button class="banner-button">
+        {{ section.settings.button_text }}
+      </button>
+    {% endif %}
+
   </div>
+
 </div>
+
+<style>
+.custom-banner {
+  position: relative;
+  width: 100%;
+}
+
+.banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+}
+
+.banner-button {
+  background: black;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.banner-button:hover {
+  transform: translateX(5px);
+}
+</style>

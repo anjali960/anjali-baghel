@@ -1,35 +1,21 @@
-{% schema %}
-{
-  "name": "Custom Product Grid",
-  "blocks": [
-    {
-      "type": "product",
-      "name": "Product",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Select product"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 6,
-  "presets": [
-    {
-      "name": "Custom Product Grid"
-    }
-  ]
-}
-{% endschema %}
-
 <div class="product-grid">
   {% for block in section.blocks %}
+    
     {% assign product = block.settings.product %}
     
-    <div>
-      <img src="{{ product.featured_image | image_url: width: 500 }}">
-    </div>
+    {% if product != blank and product.featured_image != blank %}
+      
+      <div class="product-card">
+        
+        {{ product.featured_image | image_url: width: 500 | image_tag: alt: product.title }}
+
+        <button class="quick-view-btn" data-handle="{{ product.handle }}">
+          +
+        </button>
+
+      </div>
+
+    {% endif %}
 
   {% endfor %}
 </div>
